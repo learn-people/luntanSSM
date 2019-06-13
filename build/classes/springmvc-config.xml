@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd   
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd   
+        http://www.springframework.org/schema/aop   
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd   
+        http://www.springframework.org/schema/tx   
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd ">
+        
+          
+       <context:component-scan base-package="com.sanzu.luntan.controller"/> 
+       <context:component-scan base-package="com.sanzu.luntan.token"/>        
+       <mvc:annotation-driven/> 
+         <!-- 视图解析器 -->
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+			<value>/WEB-INF/view/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+        </bean>
+        
+     	<!-- 配置文件上传解析器 MultipartResolver -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+          <!-- 设置请求编码格式--> 
+          <property name="defaultEncoding" value="UTF-8" />
+          
+		  <property name="maxUploadSize" value="1048576" /> <!-- 上传文件大小限制为1mb，1*1024*1024 -->
+		  <property name="maxInMemorySize" value="4096" />
+		</bean>
+		
+		<!-- 1.在文件上传解析时发现异常，此时还没有进入到Controller方法中 -->
+ 		<!-- （1）直接在配置文件spring-config.xml中使用Spring MVC提供的SimpleMappingExceptionResolver（异常解析映射器）来接收异常信息： -->
+	  	<!-- 遇到MaxUploadSizeExceededException异常时，跳转回fileUpload.jsp页面 -->
+	  <!-- <bean id="exceptionResolver" class= "org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings"> 
+		  <props>
+		    <prop key= "org.springframework.web.multipart.MaxUploadSizeExceededException">forward:/fileUpload.jsp</prop>
+	  	  </props>
+	  	</property>
+	 </bean> -->
+     <!-- 2.配置自定义异常处理器类 -->
+	
+</beans>
