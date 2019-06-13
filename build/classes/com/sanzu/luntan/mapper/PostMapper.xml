@@ -18,21 +18,7 @@
   </select>
   <!-- 查找全部信息 -->
   <select id="queryPostAll" resultType="com.sanzu.luntan.pojo.Post">
-  	 SELECT
-	post.id,
-	`user`.userNumber,
-	`user`.userName,
-	section.sectionName,
-	section.id,
-	post.postTitle,
-	post.postContent,
-	post.likeNum,
-	post.commentNum,
-	post.postTime
-	FROM
-	post
-	INNER JOIN section ON post.sectionId = section.id
-	INNER JOIN `user` ON post.userNum = `user`.userNumber
+  	SELECT * from post,user,section where post.userNum = user.userNumber and post.sectionId = section.id
   </select>
   <!-- 模糊查找 -->
   <select id="queryPostById" parameterType="String" resultType="com.sanzu.luntan.pojo.Post">
@@ -46,7 +32,7 @@
   <!-- 更新用户信息 -->
   <update id="updatePostInfo" parameterType="com.sanzu.luntan.pojo.Post">
   	<!-- 记得使用逗号隔开 -->
-  	update post set sectionId=#{adminPassword}, postTitle=#{postTitle}, postContent=#{postContent}, imgUrl=#{imgUrl}, purview=#{purview}, status=#{status} where id=#{id}
+  	update post set sectionId=#{sectionId}, postTitle=#{postTitle}, postContent=#{postContent}, imgUrl=#{imgUrl}, purview=#{purview}, status=#{status} where id=#{id}
   </update>
   <!-- 单个删除 -->
  <delete id="deletePostOne" parameterType="int">

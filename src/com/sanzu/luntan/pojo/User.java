@@ -110,5 +110,26 @@ public class User {
 	public void setPostsNum(int postsNum) {
 		this.postsNum = postsNum;
 	}
+
+	public User(int id, String userNumber, String userPassword, String userName, int grade, int exp, int jurisdiction,
+			int followsNum, int fansNum, int postsNum, String imgUrl) {
+		super();
+		this.id = id;
+		this.userNumber = userNumber;
+		this.userPassword = userPassword;
+		this.userName = userName;
+		this.grade = grade;
+		this.exp = exp;
+		this.jurisdiction = jurisdiction;
+		this.followsNum = followsNum;
+		this.fansNum = fansNum;
+		this.postsNum = postsNum;
+		this.imgUrl = imgUrl;
+	}
+
+	public User() {
+		super();
+	}
+	
 	
 }

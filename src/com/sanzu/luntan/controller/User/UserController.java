@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -30,6 +31,9 @@ import com.sanzu.luntan.util.Msg;
 //注解
 @Controller
 @RequestMapping("/user")
+//这里用了@SessionAttributes，可以直接把model中的user(也就key)放入其中
+//这样保证了session中存在user这个对象
+@SessionAttributes("user")
 public class UserController {
 	
 	UserDao dao = (UserDao) CrmUtils.getBean("userDao");
@@ -50,14 +54,21 @@ public class UserController {
 		}
 		//model.addAttribute("user",user);
 		
-		//使用session可以使页面记住登录状态
-		//引入 Session，用来在服务端和客户端之间保存一系列动作/消息的状态。
-		HttpSession session = request.getSession();
-		session.setAttribute("user", user);
 		
 		//return "index";
 		//执行select.do注解映射
 		return "forward:select.do";
+	}
+	
+	/**
+	 * 注销登录
+	 * 
+	 * */
+	@RequestMapping("/outLogin.do")
+	public String outLogin(HttpSession session) {
+		//通过session.invalidata()方法来注销当前的session
+		session.invalidate();
+		return "forward:/login.jsp";
 	}
 	
 	/**

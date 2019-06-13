@@ -11,16 +11,16 @@ $(document).on("click",".edit-btn",function(){
 	 
 	 //2、查询员工信息，并显示员工信息  // 坑爹 一开始写成了 attr(edit-id) 
 	 getpost($(this).attr("edit-id"));
-	 
 	 //3、把员工的id传递给模态框的更新按钮，为了发送ajax时传递id
 	 $("#post_update_done_btn").attr("edit-id",$(this).attr("edit-id"));
+	 getSection("#postUpdateModal #section_update_select");
 	 $("#postUpdateModal").dialog("open");
 	 //alert("edit");
 	 /*$("#postUpdateModal").modal({
 	 backdrop:"static"
 	 });*/ 
  });
- 
+              
  function getpost(id){
    $.ajax({
 	 url:"/luntanSSM/post/get.do?id="+id,

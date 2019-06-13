@@ -4,7 +4,7 @@
  $(document).on("click",".delete-btn",function(){
    //弹出是否确认删除对话框
    //alert($(this).parents("tr").find("td:eq(1)").text());
-   var postName = $(this).parents("tr").find("td:eq(1)").text()
+   var postTitle= $(this).parents("tr").find("td:eq(1)").text()
    var id = $(this).attr("delete-id");
    if(confirm("确认删除【"+postTitle+"】")){
      $.ajax({
@@ -17,7 +17,7 @@
      });
    }      
  });
- 
+              
 //完成全选、全不选功能
  $("#check_all").click(function(){
  	// attr获取checked是undefined;

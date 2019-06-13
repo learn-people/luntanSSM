@@ -23,6 +23,9 @@
 		<a href="${pageContext.request.contextPath}/user/select.do" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-print'" style="width:100%;text-align:left;margin-top:5px;">用户界面</a>
 		<a href="${pageContext.request.contextPath}/userdetail/insert.do" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-print'" style="width:100%;text-align:left;margin-top:5px;">用户详情信息界面</a>
 	</div>
+	<div title="用户注销" id="guidepage" <%if("4".equals(panelIndex)){%> data-options="selected:true"<%}%>>
+	<a href="${pageContext.request.contextPath}/user/outLogin.do" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-print'" style="width:100%;text-align:left;margin-top:5px;">注销登录</a>
+	</div>
 </div>
 <style>
  #advert a:visited{ 

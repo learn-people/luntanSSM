@@ -43,9 +43,7 @@
 <!-- 引入模态框 -->
 <%@include file="inc/userdetail/userdetail_update_modal.inc"%>
 <!-- 自定义js代码 -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/luntan/js/userdetail/userdetail.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/luntan/js/userdetail/userdetail_update.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/luntan/js/userdetail/userdetail_delete.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/luntan/js/userdetail/util.js"></script>
 
 </html>

@@ -13,6 +13,8 @@ public class Post {
 	String imgUrl; //图片地址
 	int purview;  //阅读权限
 	int status;   //状态
+	String userName; //用户名
+	String sectionName; // 板块名
 	
 	User user;  //用户表
 	Section section; //板块表
@@ -95,5 +97,26 @@ public class Post {
 	public void setSection(Section section) {
 		this.section = section;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getSectionName() {
+		return sectionName;
+	}
+	public void setSectionName(String sectionName) {
+		this.sectionName = sectionName;
+	}
+	@Override
+	public String toString() {
+		return "Post [id=" + id + ", userNum=" + userNum + ", sectionId=" + sectionId + ", postTitle=" + postTitle
+				+ ", postContent=" + postContent + ", likeNum=" + likeNum + ", commentNum=" + commentNum + ", postTime="
+				+ postTime + ", imgUrl=" + imgUrl + ", purview=" + purview + ", status=" + status + ", userName="
+				+ userName + ", sectionName=" + sectionName + ", user=" + user + ", section=" + section + "]";
+	}
+	
 	
 }

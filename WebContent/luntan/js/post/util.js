@@ -15,6 +15,23 @@
    $(ele).find(".valid-feedback .invalid-feedback").text("");
  }
  
+ //获取板块信息
+ function getSection(ele){
+	 $.ajax({
+	   url:"/luntanSSM/section/get.do",
+	   type:"GET",
+	   success:function(result){
+	     console.log(result);
+	     //清除之前留下的 option 标签
+	     $(ele).empty();
+	     $.each(result.extend.list,function(){
+	 	   var optionEle = $("<option></option>").attr("value",this.id).append(this.sectionName);
+	       optionEle.appendTo(ele);
+	     });
+	   }
+	 });
+ }
+ 
 //页面加载完成以后，直接发送ajax请求，拿到分页数据
  
  //1、页面加载完成以后，直接去发送ajax请求,要到分页数据
@@ -62,8 +79,8 @@
 		 //构建单元格
 		 var checkBoxTd = $("<td><input type='checkbox' class='check-item' /></td>");
 		 var postIdTd = $("<td></td>").append(item.id);
-		 var userNameTd = $("<td></td>").append(item.user.userName);
-		 var sectionNameTd = $("<td></td>").append(item.section.sectionName);
+		 var userNameTd = $("<td></td>").append(item.userName);
+		 var sectionNameTd = $("<td></td>").append(item.sectionName);
 		 var postTitleTd = $("<td></td>").append(item.postTitle);
 		 var postContentTd = $("<td></td>").append(item.postContent);
 		 var postTimeTd = $("<td></td>").append(item.postTime);

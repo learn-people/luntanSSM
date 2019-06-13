@@ -8,7 +8,7 @@
 		<div class="form-group row">
 			<label class="col-sm-3 col-form-label">用户账号</label>
 			<div class="col-sm-9">
-				<input type="text"  class="form-control" id="userNum_update_input" readonly="readonly" name="userNum" >
+				<input type="text"  class="form-control" id="userNum_update_input" readonly="readonly" name="userNum" value="${user.userNumber}" >
 				<div class="invalid-feedback">账号错误，请输入3-11位的数字</div>
 			</div>
 		</div>
@@ -36,14 +36,14 @@
 			</div>
 		</div>
 		
-		<div id="containers" class="form-group row">
+		<div id="container" class="form-group row">
 	  <label class="col-sm-3 col-form-label">插入图片</label>
 	  <div class="col-sm-9">
 	    <!-- 显示文件名的文本框 -->
 	    <input id="update_imgName"class="form-control" readonly="readonly">
 	    <!-- 处理图片的url -->
 	    <input name="imgUrl" id="update_imgUrl" type="hidden">
-	    <button type="button" id="pickfiles" style="font-size:12px;display: inline">选择文件</button>
+	    <button type="button" id="pickfile" style="font-size:12px;display: inline">选择文件</button>
 	  </div>
 	</div>
 	
@@ -52,6 +52,11 @@
 		<div class="col-sm-6">
 	  	<!-- 阅读权限提交权限值即可 -->
 	  	<select class="custom-select my-1 mr-sm-2" name="purview" id="purview_update_select">
+		  	<option> 1</option>
+			<option> 2</option>
+			<option> 3</option>
+			<option> 4</option>
+			<option> 5</option>
 	  	</select>
 	  </div>
 	</div>

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,6 +105,9 @@ public class PostController {
 	@RequestMapping(value="/insert.do",method=RequestMethod.POST)
 	public Msg savePostWithJson(Post post,BindingResult result,HttpServletRequest request,HttpSession httpSession) {
 		
+		User user = (User) httpSession.getAttribute("user");
+		String userNumber = user.getUserNumber();
+		post.setUserNum(userNumber);
 		
 		if(result.hasErrors()) {
 			//校验失败，因该返回失败，在模态框中显示校验失败的错误信息

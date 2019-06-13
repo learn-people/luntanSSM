@@ -7,27 +7,11 @@
  * 要改的将会很多
  * */
  $("#post_add").click(function(){
-	 
+	
+	 //调用获取板块信息的方法
    getSection("#postAddModal #section_add_select");
    $("#postAddModal").dialog("open");
  });
- 
- //获取板块信息
- function getSection(ele){
-	 $.ajax({
-	   url:"/luntanSSM/section/get.do",
-	   type:"GET",
-	   success:function(result){
-	     console.log(result);
-	     //清除之前留下的 option 标签
-	     $(ele).empty();
-	     $.each(result.extend.list,function(){
-	 	   var optionEle = $("<option></option>").attr("value",this.id).append(this.sectionName);
-	       optionEle.appendTo(ele);
-	     });
-	   }
-	 });
- }
  
 //添加模态框 点击保存按钮的事件
  $("#post_add_save_btn").click(function(){
@@ -47,9 +31,19 @@
 	}
 	 
  });
+ 
  //保存数据
- function add_saveData(){			
-	 $.ajax({
+ function add_saveData(){		
+	 var title = $("#postTitle_add_input").val();
+	 var content = $("#postContent_add_input").val();
+	 var sectionId = $("#sectionId_add_select").val();
+	 
+	 if(title == null || title == ""){
+		 alert("请输入标题");
+	 }else if(content == null || content == ""){
+		 alert("请输入内容");
+	 }else{
+	   $.ajax({
 		 url:"/luntanSSM/post/insert.do",
 		 type:"POST",
 		 data:$("#postAddModal form").serialize(), 
@@ -62,7 +56,8 @@
 		   to_page(totalRecords);	
 		   reset_form("#postAddModal form");
 		 }
-	 }); 
+	   }); 
+	 }
  }
  
  /*************************************添加用户模块结束*******************************************************************************/
