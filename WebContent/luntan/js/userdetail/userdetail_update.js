@@ -25,8 +25,6 @@ $(document).on("click",".edit-btn",function(){
 	   console.log(result);
 	   var userdetailData = result.extend.userdetail;
 	   $("#userNum_update_input").val(userdetailData.userNum);
-	   $("#userdetailUpdateModal input[name=gender] ").val([userdetailData.gender]);
-	   $("#birthday_update_input").val(userdetailData.birthday);
 	   $("#autography_update_input").val(userdetailData.autography);
 	   $("#school_update_input").val(userdetailData.school);
 	   $("#job_update_input").val(userdetailData.job);

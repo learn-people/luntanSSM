@@ -15,7 +15,7 @@
 
   	<div class="form-group row">
   		<label class="col-sm-3 col-form-label">密码</label>
-  			<div class="col-sm-9">
+  		<div class="col-sm-9">
   			<input type="password"  class="form-control" id="userPassword_add_input" name="userPassword">
   		</div>
   	</div>
@@ -27,6 +27,27 @@
   			<div class="invalid-feedback">昵称输入错误，请重新输入</div>
   		</div>
   	</div>
+  	
+  	<div class="form-group row">
+      <label  class="col-sm-3 col-form-label">性别</label>  
+      <div class="col-sm-9">
+		  <div class="form-check form-check-inline">
+		    <input class="form-check-input" type="radio" name="gender" id="gender1_add_input" checked value="男">
+		    <label class="form-check-label" >男</label>
+		  </div>
+		  <div class="form-check form-check-inline">
+		    <input class="form-check-input" type="radio" name="gender" id="gender2_add_input" value="女">
+		    <label class="form-check-label" >女</label>
+		  </div>
+	  </div>  
+    </div>
+    
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">出生日期</label>
+      <div class="col-sm-9">
+        <input type="date"  class="form-control" id="birthday_add_input" name="birthday">
+      </div>
+    </div>
   	
   	<div id="containers" class="form-group row">
     <label class="col-sm-3 col-form-label">头像图片</label>

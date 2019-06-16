@@ -1,5 +1,6 @@
 package com.sanzu.luntan.controller.Post;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -126,4 +127,39 @@ public class PostController {
 		  return Msg.success();
 		}
 	}
+	
+	/**
+	 *删除单个信息
+	 *@param id 根据用户的id进行删除的
+	 * 
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/deleteOne.do",method=RequestMethod.DELETE)
+	public Msg deleteOne(int id) {
+		dao.deleteOnePost(id);
+		return Msg.success();
+	}
+	
+	/**
+	 * 批量删除用户
+	 * @param ids 根据用户的id进行批量删除
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/delete.do",method=RequestMethod.DELETE)
+	public Msg delete(String ids) {
+		//批量删除的
+		if(ids.contains("-")) {
+			List<Integer> delete_id = new ArrayList<>();
+			String[] str_ids = ids.split("-");
+			for(String str: str_ids) {
+				delete_id.add(Integer.parseInt(str));
+			}
+			dao.deletePost(delete_id);
+		}else {
+			int id = Integer.parseInt(ids);
+			dao.deleteOnePost(id);
+		}
+		return Msg.success();
+	}
+	
 }

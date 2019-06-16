@@ -8,16 +8,16 @@
        onHeaderContextMenu:createGridHeaderContextMenu,
        loadMsg:'数据正在努力加载，请稍后...'" >
   <thead>
-			<th> <input type="checkbox" id="check_all" /></th>
+	  <th> <input type="checkbox" id="check_all" /></th>
       <th data-options="field:'id',width:40,align:'center'" style="display:none">编号</th>
-      <th data-options="field:'user.userNumber',width:200,align:'center'" >用户账号</th>
-      <th data-options="field:'gender',width:150,align:'center'">性别</th>
-      <th data-options="field:'birthday',width:200,align:'center'" >出生日期</th>
+      <th data-options="field:'user.userNumber',width:200,align:'center'" >用户账号</th> 
+      <th data-options="field:'user.gender',width:100,align:'center'" >性别</th>       
+      <th data-options="field:'user.birthday',width:100,align:'center'" >生日</th>       
       <th data-options="field:'autography',width:100,align:'center'" >签名</th>
       <th data-options="field:'school',width:200,align:'center'" >学校</th>
       <th data-options="field:'job',width:100,align:'center'" >职业</th>
       <th data-options="field:'hometown',width:100,align:'center'" >家庭住址</th>
-	    <th data-options="field:'setting',width:200,align:'center'" >操作</th>
+	  <th data-options="field:'setting',width:200,align:'center'" >操作</th>
 
   </thead>
   

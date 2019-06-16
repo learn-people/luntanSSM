@@ -18,19 +18,7 @@
   </select>
   <!-- 查找全部 -->
   <select id="queryUserdetailAll" resultType="com.sanzu.luntan.pojo.Userdetail">
-  	SELECT
-	userdetail.id,
-	userdetail.userNum,
-	`user`.userName,
-	userdetail.gender,
-	userdetail.birthday,
-	userdetail.autography,
-	userdetail.school,
-	userdetail.job,
-	userdetail.hometown
-	FROM
-	userdetail
-	INNER JOIN `user` ON userdetail.userNum = `user`.userNumber
+  	select * from user,userdetail where userdetail.userNum = user.userNumber
   </select>
   <!-- 模糊查找 -->
   <select id="queryUserdetailById" parameterType="String" resultType="com.sanzu.luntan.pojo.Userdetail">
@@ -51,7 +39,7 @@
   <!-- 更新用户信息 -->
   <update id="updateUserdetailInfo" parameterType="com.sanzu.luntan.pojo.Userdetail">
   	<!-- 记得使用逗号隔开 -->
-  	update userdetail set gender=#{gender}, birthday=#{birthday}, autography=#{autography}, school=#{school}, job=#{job}, hometown=#{hometown} where id=#{id}
+  	update userdetail set autography=#{autography}, school=#{school}, job=#{job}, hometown=#{hometown} where id=#{id}
   </update>
   <!-- 单个删除 -->
  <delete id="deleteUserdetailOne" parameterType="int">

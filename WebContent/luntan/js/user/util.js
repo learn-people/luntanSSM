@@ -76,14 +76,13 @@
      data:"pn="+pn,
      type:"GET",
      success:function(result){
-    	 console.log(result);
-     //console.log(result);
-     //1、解析并显示员工数据
-     build_user_advert(result);
-     //2、解析并显示分页信息
-     build_page_info(result);
-     //3、解析显示分页条数据
-     build_page_nav(result);
+       //console.log(result);
+       //1、解析并显示员工数据
+       build_user_advert(result);
+       //2、解析并显示分页信息
+       build_page_info(result);
+       //3、解析显示分页条数据
+       build_page_nav(result);
      }
    });
  }
@@ -105,6 +104,8 @@
 		 var userIdTd = $("<td></td>").append(item.id);
 		 var userNumberTd = $("<td></td>").append(item.userNumber);
 		 var userNameTd = $("<td></td>").append(item.userName);
+		 var genderTd = $("<td></td>").append(item.gender);
+		 var birthdayTd = $("<td></td>").append(item.birthday);
 		 var imgUrlTd = $("<td></td>").append(item.imgUrl);
 		 var gradeTd = $("<td></td>").append(item.grade); 
 		 var expTd = $("<td></td>").append(item.exp); 
@@ -129,6 +130,8 @@
 		 .append(userIdTd)
 		 .append(userNumberTd)
 		 .append(userNameTd)
+		 .append(genderTd)
+		 .append(birthdayTd)
 		 .append(imgUrlTd)
 		 .append(gradeTd)
 		 .append(expTd)

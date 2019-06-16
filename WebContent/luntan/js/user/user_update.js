@@ -50,6 +50,8 @@ $(document).on("click",".edit-btn",function(){
 	   $("#userNumber_update_input").val(userData.userNumber);
 	   $("#userPassword_update_input").val(userData.userPassword);
 	   $("#userName_update_input").val(userData.userName);
+	   $("#userUpdateModal input[name=gender] ").val([userData.gender]);
+	   $("#birthday_update_input").val(userData.birthday);
 	   $("#update_imgUrl").val(userData.imgUrl);
 	   update_imgName = userData.update_imgName;
 	 }

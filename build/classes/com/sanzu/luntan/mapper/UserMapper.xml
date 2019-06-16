@@ -31,7 +31,7 @@
   </select>
   <!-- 用户注册 -->
   <insert id="insertUser" parameterType="com.sanzu.luntan.pojo.User" >
-  	insert into user(userNumber,userPassword,userName,imgUrl) values(#{userNumber},#{userPassword},#{userName},#{imgUrl})
+  	insert into user(userNumber,gender,birthday,userPassword,userName,imgUrl) values(#{userNumber},#{gender},#{birthday},#{userPassword},#{userName},#{imgUrl})
   </insert>
   <!-- 校验用户名是否重复 -->
   <select id="checkUserName" parameterType="String" resultType="int">
@@ -48,7 +48,7 @@
   <!-- 更新用户信息 -->
   <update id="updateUserInfo" parameterType="com.sanzu.luntan.pojo.User">
   	<!-- 记得使用逗号隔开 -->
-  	update user set userPassword=#{userPassword}, userName=#{userName}, imgUrl=#{imgUrl}, grade=#{grade}, exp=#{exp}, jurisdiction=#{jurisdiction}, fansNum=#{fansNum}, followsNum=#{followsNum}, postsNum=#{postsNum} where id=#{id}
+  	update user set userPassword=#{userPassword}, userName=#{userName},gender=#{gender}, birthday=#{birthday}, imgUrl=#{imgUrl}, grade=#{grade}, exp=#{exp}, jurisdiction=#{jurisdiction}, fansNum=#{fansNum}, followsNum=#{followsNum}, postsNum=#{postsNum} where id=#{id}
   </update>
   <!-- 单个删除 -->
  <delete id="deleteUserOne" parameterType="int">

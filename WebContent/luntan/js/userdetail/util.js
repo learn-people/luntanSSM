@@ -64,8 +64,8 @@
 		 var checkBoxTd = $("<td><input type='checkbox' class='check-item' /></td>");
 		 var idTd = $("<td></td>").append(item.id);
 		 var userNumTd = $("<td></td>").append(item.userNum);
-		 var birthdayTd = $("<td></td>").append(item.birthday);
 		 var genderTd = $("<td></td>").append(item.gender);
+		 var birthdayTd = $("<td></td>").append(item.birthday);
 		 var autographyTd = $("<td></td>").append(item.autography); 
 		 var schoolTd = $("<td></td>").append(item.school); 
 		 var jobTd = $("<td></td>").append(item.job); 
@@ -85,8 +85,8 @@
 		 .append(checkBoxTd)
 		 .append(idTd)
 		 .append(userNumTd)
-		 .append(birthdayTd)
 		 .append(genderTd)
+		 .append(birthdayTd)
 		 .append(autographyTd)
 		 .append(schoolTd)
 		 .append(jobTd)

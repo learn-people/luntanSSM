@@ -19,14 +19,17 @@
        onHeaderContextMenu:createGridHeaderContextMenu,
        loadMsg:'数据正在努力加载，请稍后...'" >
   <thead>
-			<th> <input type="checkbox" id="check_all" /></th>
+	  <th> <input type="checkbox" id="check_all" /></th>
       <th data-options="field:'id',width:40,align:'center'" style="display:none">编号</th>
       <th data-options="field:'userNumber',width:200,align:'center'" >用户账号</th>
       <th data-options="field:'userName',width:200,align:'center'" >用户名称</th>
-      <th data-options="field:'imgUrl',width:200,align:'center'" >用户头像</th>
+      <th data-options="field:'gender',width:200,align:'center'" >性别</th>
+      <th data-options="field:'imgUrl',width:50,align:'center'">出生日期</th>
+      <th data-options="field:'birthday',width:100,align:'center'">头像</th>      
       <th data-options="field:'grade',width:100,align:'center'" >用户等级</th>
       <th data-options="field:'exp',width:100,align:'center'" >经验</th>
       <th data-options="field:'jurisdiction',width:40,align:'center'" >权限级别</th>
+      <th data-options="field:'setting',width:40,align:'center'" >操作</th>
   </thead>
   
   <tbody>

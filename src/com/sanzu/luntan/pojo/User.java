@@ -14,6 +14,9 @@ public class User {
 	@Pattern(regexp="(^[a-zA-Z0-9_-]{5,16}$)|(^[\\u2E80-\\u9FFF]{2,10})",message="用户名必须是5-16位数字和字母的组合或者2-10位中文")
 	String userName;  //用户名
 	
+	String gender; //性别
+	String birthday; //出生日期
+	
 	int grade;    //用户等级
 	int exp;     //经验
 	int jurisdiction;   //权限级别
@@ -111,25 +114,29 @@ public class User {
 		this.postsNum = postsNum;
 	}
 
-	public User(int id, String userNumber, String userPassword, String userName, int grade, int exp, int jurisdiction,
-			int followsNum, int fansNum, int postsNum, String imgUrl) {
-		super();
-		this.id = id;
-		this.userNumber = userNumber;
-		this.userPassword = userPassword;
-		this.userName = userName;
-		this.grade = grade;
-		this.exp = exp;
-		this.jurisdiction = jurisdiction;
-		this.followsNum = followsNum;
-		this.fansNum = fansNum;
-		this.postsNum = postsNum;
-		this.imgUrl = imgUrl;
+	public String getGender() {
+		return gender;
 	}
 
-	public User() {
-		super();
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
-	
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userNumber=" + userNumber + ", userPassword=" + userPassword + ", userName="
+				+ userName + ", gender=" + gender + ", birthday=" + birthday + ", grade=" + grade + ", exp=" + exp
+				+ ", jurisdiction=" + jurisdiction + ", followsNum=" + followsNum + ", fansNum=" + fansNum
+				+ ", postsNum=" + postsNum + ", imgUrl=" + imgUrl + "]";
+	}
+
 	
 }

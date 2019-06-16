@@ -18,6 +18,27 @@
   			<input type="password"  class="form-control" id="userPassword_update_input" name="userPassword">
   		</div>
   	</div>
+  	
+  	<div class="form-group row">
+      <label  class="col-sm-3 col-form-label">性别</label>  
+      <div class="col-sm-9">
+		  <div class="form-check form-check-inline">
+		    <input class="form-check-input" type="radio" name="gender" id="gender1_update_input" checked value="男">
+		    <label class="form-check-label" >男</label>
+		  </div>
+		  <div class="form-check form-check-inline">
+		    <input class="form-check-input" type="radio" name="gender" id="gender2_update_input" value="女">
+		    <label class="form-check-label" >女</label>
+		  </div>
+	  </div>  
+    </div>
+    
+    <div class="form-group row">
+    <label class="col-sm-3 col-form-label">出生日期</label>
+    <div class="col-sm-9">
+      <input type="date"  class="form-control" id="birthday_update_input" name="birthday">
+    </div>
+   </div>
 
   	<div class="form-group row">
   		<label class="col-sm-3 col-form-label">昵称</label>

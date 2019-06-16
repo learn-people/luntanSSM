@@ -1,12 +1,15 @@
 package com.sanzu.luntan.controller.User;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -22,11 +25,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 import com.sanzu.luntan.dao.UserDao;
-import com.sanzu.luntan.pojo.Admin;
 import com.sanzu.luntan.pojo.User;
 import com.sanzu.luntan.util.CrmUtils;
 import com.sanzu.luntan.util.Msg;
+
 
 //注解
 @Controller
@@ -42,8 +46,9 @@ public class UserController {
 	@RequestMapping("/login.do")
 	public String login(Model model,User u,HttpServletRequest request) {
 		
-		User user = dao.logInUser(u);
+		System.out.println(u);
 		
+		User user = dao.logInUser(u);
 		if(user == null) {
 			model.addAttribute("loginError", "账号或密码错误");
 			//springMVC中的请求转发和重定向redirect和forward
@@ -76,7 +81,7 @@ public class UserController {
 	 * 
 	 * 
 	 * */
-//查询全部信息
+	//查询全部信息
 	@RequestMapping("/select.do")
 	public String select(Model model) {
 		List<User> list = dao.selectAll();
@@ -145,6 +150,7 @@ public class UserController {
 			return Msg.fail().add("errorFields", map);
 		}else {
 			//校验成功
+			System.out.println(u);
 			dao.insertUser(u);
 			return Msg.success();
 		}
@@ -223,6 +229,111 @@ public class UserController {
 			dao.deleteOneUser(id);
 		}
 		return Msg.success();
+	}
+	
+/*********************************移动端的交互************************************************************/
+	//和移动端相连
+	
+	/**
+	 * 移动端的登录
+	 * 
+	 * */
+	@RequestMapping("/login.json")
+	public void loginApp(HttpServletResponse response,HttpServletRequest request) {
+		String callback = request.getParameter("callback");
+		System.out.println(callback);
+		String userNumber = request.getParameter("userNumber");
+		String userPassword = request.getParameter("userPassword");
+		System.out.println(userPassword);
+		System.out.println(userNumber);
+		
+		User u = new User();
+		u.setUserNumber(userNumber);
+		u.setUserPassword(userPassword);
+		
+		User JsonRS = dao.logInUser(u);
+		
+		//解决后台数据传输时的乱码问题
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			if (callback != null && callback.length() > 0) {
+				out.print(callback + "(" + new Gson().toJson(JsonRS) + ")");
+			} else {
+				out.print(new Gson().toJson(JsonRS));
+			}
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * 移动端注册时校验账号是否可用
+	 * 
+	 * */
+	@ResponseBody
+	@RequestMapping("/checkNumber.json")
+	public void checkNumber(@RequestParam String userNumber , HttpServletResponse response,HttpServletRequest request) throws IOException {
+		
+		String callback = request.getParameter("callback");
+		
+		int JsonRS = dao.checkUserNumber(userNumber);
+		
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+	    //用回调函数名称包裹返回数据
+		if(JsonRS == 1) {
+			String result = callback + "(" + JsonRS + ")";
+			response.getWriter().write(result);
+		}else {
+			String result = callback + "(" + JsonRS + ")";
+			response.getWriter().write(result);
+		}
+		//return Msg.success();
+	}
+	
+	/**
+	 * 移动端的用户注册
+	 * 
+	 * 
+	 * */
+	@RequestMapping("/register.json")
+	public void register(HttpServletResponse response,HttpServletRequest request) throws IOException {
+	   
+		String callback = request.getParameter("callback");
+		User user = new User();
+		//获取Android端数据
+		
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+	    //用回调函数名称包裹返回数据
+	    String result = callback + "(" +dao.insertUser(user) + ")";
+	    response.getWriter().write(result);
+		//return Msg.success();
+	}
+
+	
+	@RequestMapping(value="/select.json")
+	public void selectApp(HttpServletResponse response,HttpServletRequest request,Model model) throws IOException {
+	 
+		String callback = request.getParameter("callback");
+		
+		List<User> JsonRS =  dao.selectAll();
+		//解决后台数据传输时的乱码问题
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (callback != null && callback.length() > 0) {
+			out.print(callback + "(" + new Gson().toJson(JsonRS) + ")");
+		} else {
+			out.print(new Gson().toJson(JsonRS));
+		}
+		out.flush();
+		out.close();
 	}
 	
 }

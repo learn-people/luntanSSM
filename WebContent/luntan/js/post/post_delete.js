@@ -50,7 +50,7 @@
  	});
  			
  	//去除adminNames多余的，
- 	postTitles = postTitle.substring(0,postTitle.length-1);
+ 	postTitles = postTitles.substring(0,postTitles.length-1);
  	//去除删除的id的多余的-
  	delete_ids_str = delete_ids_str.substring(0,delete_ids_str.length-1);
  			
