@@ -31,6 +31,9 @@ import com.sanzu.luntan.pojo.User;
 import com.sanzu.luntan.util.CrmUtils;
 import com.sanzu.luntan.util.Msg;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 
 //注解
 @Controller
@@ -298,18 +301,31 @@ public class UserController {
 	}
 	
 	/**
-	 * 移动端的用户注册
-	 * 
+	 * 移动端的用户注册，数据插入数据表
 	 * 
 	 * */
 	@RequestMapping("/register.json")
-	public void register(HttpServletResponse response,HttpServletRequest request) throws IOException {
+	public void select(@RequestParam("callback") String callback,
+	                     HttpServletResponse response,HttpServletRequest request,Model model) 
+	                    		 throws IOException {
 	   
-		String callback = request.getParameter("callback");
 		User user = new User();
 		//获取Android端数据
+		String data = request.getParameter("data");
+		//将string类型转换为json数组
+		JSONArray rows = JSONArray.fromObject(data);
+		JSONObject row = null;
+		row = rows.getJSONObject(0);
 		
-		response.setContentType("application/json;charset=utf-8");
+		user.setUserNumber((String) row.get("userNumber"));
+		user.setUserPassword((String) row.get("userPassword"));
+		user.setExp((int) row.get("exp"));
+		user.setFansNum((int) row.get("fansNum"));
+		user.setGrade(row.getInt("grade"));
+		user.setImgUrl((String) row.get("imgUrl"));
+		user.setJurisdiction((int) row.get("jurisdiction"));
+		user.setPostsNum((int) row.get("postsNum"));
+		
 		PrintWriter out = response.getWriter();
 	    //用回调函数名称包裹返回数据
 	    String result = callback + "(" +dao.insertUser(user) + ")";
@@ -317,7 +333,13 @@ public class UserController {
 		//return Msg.success();
 	}
 
-	
+
+
+	/**
+	 * 移动端申请查询数据
+	 * 
+	 * 
+	 * */
 	@RequestMapping(value="/select.json")
 	public void selectApp(HttpServletResponse response,HttpServletRequest request,Model model) throws IOException {
 	 
