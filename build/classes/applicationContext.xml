@@ -57,5 +57,7 @@
    <bean class="com.sanzu.luntan.dao.SectionDao" id="sectionDao" autowire="byName" />
    <bean class="com.sanzu.luntan.dao.UserdetailDao" id="userdetailDao" autowire="byName" />
    <bean class="com.sanzu.luntan.dao.PostDao" id="postDao" autowire="byName" />
+   <bean class="com.sanzu.luntan.dao.FollowedDao" id="followedDao" autowire="byName" />
+   <bean class="com.sanzu.luntan.dao.FansDao" id="fansDao" autowire="byName" />
    	 
 </beans>

@@ -25,6 +25,8 @@
     <mapper resource="com/sanzu/luntan/mapper/SectionMapper.xml"/>
     <mapper resource="com/sanzu/luntan/mapper/UserdetailMapper.xml"/>
     <mapper resource="com/sanzu/luntan/mapper/PostMapper.xml"/>
+    <mapper resource="com/sanzu/luntan/mapper/FollowedMapper.xml"/>
+    <mapper resource="com/sanzu/luntan/mapper/FansMapper.xml"/>
   </mappers>
     
 </configuration>

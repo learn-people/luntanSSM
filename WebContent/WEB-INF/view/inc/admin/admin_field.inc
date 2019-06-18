@@ -17,7 +17,7 @@
        data-options="singleSelect:true,fit:true,toolbar:'#tb',
        pagination:true,pageSize:30,pageList:[10,20,30,50,100],
        onHeaderContextMenu:createGridHeaderContextMenu,
-       loadMsg:'数据正在努力加载，请稍后...'" >
+       loadMsg:"'数据正在努力加载，请稍后...'" >
   <thead>
 			<th> <input type="checkbox" id="check_all" /></th>
       <th data-options="field:'id',width:40,align:'center'" style="display:none">编号</th>

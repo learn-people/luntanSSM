@@ -104,28 +104,14 @@ public class PostController {
 	 * */
 	@ResponseBody
 	@RequestMapping(value="/insert.do",method=RequestMethod.POST)
-	public Msg savePostWithJson(Post post,BindingResult result,HttpServletRequest request,HttpSession httpSession) {
+	public Msg savePostWithJson(Post post,HttpServletRequest request,HttpSession httpSession) {
 		
 		User user = (User) httpSession.getAttribute("user");
 		String userNumber = user.getUserNumber();
 		post.setUserNum(userNumber);
 		
-		if(result.hasErrors()) {
-			//校验失败，因该返回失败，在模态框中显示校验失败的错误信息
-			Map<String, Object> map = new HashMap<>();
-			List<FieldError> errors = result.getFieldErrors();
-			for (FieldError fieldError : errors) {
-			  /*System.out.println("错误的字段名："+fieldError.getField());
-			  System.out.println("错误信息："+fieldError.getDefaultMessage());*/
-			  map.put(fieldError.getField(), fieldError.getDefaultMessage());
-			}
-			return Msg.fail().add("errorFields", map);
-		}else {
-			//校验成功
-		  /*System.out.println(a);*/
-		  dao.insertPost(post);
-		  return Msg.success();
-		}
+	    dao.insertPost(post);
+	    return Msg.success();
 	}
 	
 	/**
