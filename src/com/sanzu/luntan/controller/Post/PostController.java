@@ -1,17 +1,18 @@
 package com.sanzu.luntan.controller.Post;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.aspectj.weaver.ast.Var;
+import org.springframework.beans.factory.config.YamlProcessor.ResolutionMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 import com.sanzu.luntan.dao.PostDao;
 import com.sanzu.luntan.pojo.Post;
 import com.sanzu.luntan.pojo.User;
@@ -31,6 +33,17 @@ import com.sanzu.luntan.util.Msg;
 public class PostController {
 	
 	PostDao dao = (PostDao) CrmUtils.getBean("postDao");
+	
+	/**
+	 *	从用户表中调用数据插入用户详情表中 
+	 * @return 
+	 * 
+	 * */
+	@RequestMapping("/selectLike.do")
+	public String saveUserdetail() {
+		dao.updateLikeAdd();
+		return "forward:select.do";
+	}
 	
 	/**
 	 * 用户查询并转到jsp页面
@@ -47,7 +60,7 @@ public class PostController {
 	}
 	
 	/**
-	 * 分页查询用户信息
+	 * 分页查询信息
 	 * @param pn 默认从第一页开始  请求参数
 	 * @param model
 	 * @return
@@ -148,4 +161,119 @@ public class PostController {
 		return Msg.success();
 	}
 	
+
+
+/*******************移动端请求获取数据**************************************************************************/
+
+/**
+ *移动端查询全部贴子 
+ * 
+ * */
+ 
+	@RequestMapping(value="/selectAll.json")
+	public void selectAll(HttpServletRequest request,HttpServletResponse response) throws IOException {
+		
+		String callback = request.getParameter("callback");
+		
+		List<Post> JsonRS = dao.selectAll();
+		//System.out.println(JsonRS);
+		//解决后台数据传输时的乱码问题
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (callback != null && callback.length() > 0) {
+			out.print(callback + "(" + new Gson().toJson(JsonRS) + ")");
+		} else {
+			out.print(new Gson().toJson(JsonRS));
+		}
+		out.flush();
+		out.close();
+	}
+	
+	/**
+	 *移动端查询指定板块的全部贴子 
+	 * 
+	 * */
+	
+	@RequestMapping(value="/select.json")
+	public void select(@RequestParam Integer sectionId,HttpServletRequest request,HttpServletResponse response) throws IOException {
+		
+		String callback = request.getParameter("callback");
+		
+		List<Post> JsonRS = dao.select(sectionId);
+		//System.out.println(JsonRS);
+		//解决后台数据传输时的乱码问题
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (callback != null && callback.length() > 0) {
+			out.print(callback + "(" + new Gson().toJson(JsonRS) + ")");
+		} else {
+			out.print(new Gson().toJson(JsonRS));
+		}
+		out.flush();
+		out.close();
+	}
+	
+	/**
+	 * 查询贴子的详细信息
+	 * @param id 要查询的信息
+	 * 
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/get.json",method=RequestMethod.GET)
+	public void get(@RequestParam Integer id, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String callback = request.getParameter("callback");
+		System.out.println(id);
+		Post post = dao.selectPost(id);
+		System.out.println(post);
+		//解决后台数据传输时的乱码问题
+		response.setContentType("application/json;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (callback != null && callback.length() > 0) {
+			out.print(callback + "(" + new Gson().toJson(post) + ")");
+		} else {
+			out.print(new Gson().toJson(post));
+		}
+		out.flush();
+		out.close();
+	}
+	
+	/**
+	 * 更新贴子的观看人数
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/updateLook.json",method=RequestMethod.GET)
+	public void updateLook(@RequestParam Integer id,HttpServletResponse response,HttpServletRequest request) throws IOException{
+		String callback = request.getParameter("callback");
+		int i = dao.updateLook(id);
+		
+		if(i == 1) {
+			String result = callback + "(" + i + ")";
+			response.getWriter().write(result);
+		}else {
+			String result = callback + "(" + i + ")";
+			response.getWriter().write(result);
+		}
+		
+	}
+	
+	/**
+	 * 更新贴子的点赞人数,增加
+	 * */
+	@ResponseBody
+	@RequestMapping(value="/updateLikeAdd.json",method=RequestMethod.GET)
+	public void updateLikeAdd(HttpServletResponse response,HttpServletRequest request) throws IOException{
+		String callback = request.getParameter("callback");
+		int i = dao.updateLikeAdd();
+		
+		if(i == 1) {
+			String result = callback + "(" + i + ")";
+			response.getWriter().write(result);
+		}else {
+			String result = callback + "(" + i + ")";
+			response.getWriter().write(result);
+		}
+		
+	}
+	
 }
+

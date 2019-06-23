@@ -15,6 +15,10 @@ public class PostDao extends SqlSessionDaoSupport {
 	public List<Post> selectAll(){
 		return this.getSqlSession().selectList("com.sanzu.luntan.mapper.PostMapper.queryPostAll");
 	}
+	//查找指定板块的全部
+	public List<Post> select(int sectionId){
+		return this.getSqlSession().selectList("com.sanzu.luntan.mapper.PostMapper.queryPost",sectionId);
+	}
 	//添加贴子
 	public int insertPost(Post p) {
 		return this.getSqlSession().insert("com.sanzu.luntan.mapper.PostMapper.insertPost", p);
@@ -22,6 +26,18 @@ public class PostDao extends SqlSessionDaoSupport {
 	//更新贴子信息
 	public int updatePost(Post p) {
 		return this.getSqlSession().update("com.sanzu.luntan.mapper.PostMapper.updatePostInfo", p);
+	}
+	//更新贴子观看数
+	public int updateLook(int id) {
+		return this.getSqlSession().update("com.sanzu.luntan.mapper.PostMapper.updateLookNum", id);
+	}
+	//更新贴子点赞数，增加
+	public int updateLikeAdd() {
+		return this.getSqlSession().update("com.sanzu.luntan.mapper.PostMapper.updateLikeNumAdd");
+	}
+	//更新评论数
+	public int updatePurview() {
+		return this.getSqlSession().update("com.sanzu.luntan.mapper.PostMapper.updatePurview");
 	}
 	//删除单个信息
 	public int deleteOnePost(int id) {

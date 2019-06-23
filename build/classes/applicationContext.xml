@@ -50,7 +50,7 @@
          <!--指定核心配置文件位置 -->
    		<property name="configLocation" value="classpath:mybatis-config.xml"/>
    </bean>
-                                           
+              
    <!-- 自动装配 -->
    <bean class="com.sanzu.luntan.dao.AdminDao" id="adminDao" autowire="byName" />
    <bean class="com.sanzu.luntan.dao.UserDao" id="userDao" autowire="byName" />
@@ -59,5 +59,8 @@
    <bean class="com.sanzu.luntan.dao.PostDao" id="postDao" autowire="byName" />
    <bean class="com.sanzu.luntan.dao.FollowedDao" id="followedDao" autowire="byName" />
    <bean class="com.sanzu.luntan.dao.FansDao" id="fansDao" autowire="byName" />
+   <bean class="com.sanzu.luntan.dao.CommentDao" id="commentDao" autowire="byName" />
+   <bean class="com.sanzu.luntan.dao.PraiseDao" id="praiseDao" autowire="byName" />
+   <bean class="com.sanzu.luntan.dao.CollectionDao" id="collectionDao" autowire="byName" />
    	 
 </beans>

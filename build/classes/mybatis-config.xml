@@ -27,6 +27,9 @@
     <mapper resource="com/sanzu/luntan/mapper/PostMapper.xml"/>
     <mapper resource="com/sanzu/luntan/mapper/FollowedMapper.xml"/>
     <mapper resource="com/sanzu/luntan/mapper/FansMapper.xml"/>
+    <mapper resource="com/sanzu/luntan/mapper/CommentMapper.xml"/>
+    <mapper resource="com/sanzu/luntan/mapper/PraiseMapper.xml"/>
+    <mapper resource="com/sanzu/luntan/mapper/CollectionMapper.xml"/>
   </mappers>
     
 </configuration>

@@ -9,7 +9,6 @@
   		<label class="col-sm-3 col-form-label">用户账号</label>
   		<div class="col-sm-9">
   			<input type="text"  class="form-control" id="userNum_add_input" name="userNum" value="${user.userNumber}" >
-  			<div class="invalid-feedback">账号错误，请输入3-11位的数字</div>
   		</div>
   	</div>
 

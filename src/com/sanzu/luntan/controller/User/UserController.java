@@ -288,7 +288,6 @@ public class UserController {
 		int JsonRS = dao.checkUserNumber(userNumber);
 		
 		response.setContentType("application/json;charset=utf-8");
-		PrintWriter out = response.getWriter();
 	    //用回调函数名称包裹返回数据
 		if(JsonRS == 1) {
 			String result = callback + "(" + JsonRS + ")";

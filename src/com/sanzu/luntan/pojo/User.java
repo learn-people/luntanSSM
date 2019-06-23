@@ -138,5 +138,6 @@ public class User {
 				+ ", postsNum=" + postsNum + ", imgUrl=" + imgUrl + "]";
 	}
 
+
 	
 }

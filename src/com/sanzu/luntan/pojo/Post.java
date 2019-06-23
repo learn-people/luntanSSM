@@ -8,6 +8,7 @@ public class Post {
 	String postTitle; //标题
 	String postContent;  //内容
 	int likeNum; //点赞数
+	int lookNum; //观看人数
 	int commentNum;  //收藏数
 	String postTime; //发表时间
 	String imgUrl; //图片地址
@@ -19,6 +20,12 @@ public class Post {
 	User user;  //用户表
 	Section section; //板块表
 	
+	public int getLookNum() {
+		return lookNum;
+	}
+	public void setLookNum(int lookNum) {
+		this.lookNum = lookNum;
+	}
 	public int getId() {
 		return id;
 	}
@@ -113,9 +120,9 @@ public class Post {
 	@Override
 	public String toString() {
 		return "Post [id=" + id + ", userNum=" + userNum + ", sectionId=" + sectionId + ", postTitle=" + postTitle
-				+ ", postContent=" + postContent + ", likeNum=" + likeNum + ", commentNum=" + commentNum + ", postTime="
-				+ postTime + ", imgUrl=" + imgUrl + ", purview=" + purview + ", status=" + status + ", userName="
-				+ userName + ", sectionName=" + sectionName + ", user=" + user + ", section=" + section + "]";
+		    + ", postContent=" + postContent + ", likeNum=" + likeNum + ", lookNum=" + lookNum + ", commentNum="
+		    + commentNum + ", postTime=" + postTime + ", imgUrl=" + imgUrl + ", purview=" + purview + ", status=" + status
+		    + ", userName=" + userName + ", sectionName=" + sectionName + ", user=" + user + ", section=" + section + "]";
 	}
 	
 	

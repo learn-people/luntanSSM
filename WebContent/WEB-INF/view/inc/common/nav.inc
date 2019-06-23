@@ -17,7 +17,7 @@
 		<a href="promotionManage.jsp?panelIndex=1" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-print'" style="width:100%;text-align:left;margin-top:5px;">交易购物</a>
 	</div>
 	<div title="评论管理" id="guidepage" <%if("3".equals(panelIndex)){%> data-options="selected:true"<%}%>>
-		<a href="promotionManage.jsp?panelIndex=1" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-print'" style="width:100%;text-align:left;margin-top:5px;">评论管理</a>
+		<a href="${pageContext.request.contextPath}/comment/select.do" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-print'" style="width:100%;text-align:left;margin-top:5px;">评论管理</a>
 	</div>
 	<div title="用户管理" id="guidepage" <%if("4".equals(panelIndex)){%> data-options="selected:true"<%}%>>
 		<a href="${pageContext.request.contextPath}/user/select.do" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-print'" style="width:100%;text-align:left;margin-top:5px;">用户界面</a>

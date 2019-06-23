@@ -25,17 +25,17 @@ import com.sanzu.luntan.pojo.Admin;
 import com.sanzu.luntan.util.CrmUtils;
 import com.sanzu.luntan.util.Msg;
 
-/**
- * 管理员登录
- * @param model
- * @param a 管理员的信息
- * @return
- * */
 //注解
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	
+	/**
+	 * 管理员登录
+	 * @param model
+	 * @param a 管理员的信息
+	 * @return
+	 * */
 	AdminDao dao = (AdminDao) CrmUtils.getBean("adminDao");
 	
 	@RequestMapping("/login.do")

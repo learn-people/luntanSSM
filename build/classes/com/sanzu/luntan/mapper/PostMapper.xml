@@ -12,13 +12,31 @@
 -->
 <!-- 管理员 -->
 <mapper namespace="com.sanzu.luntan.mapper.PostMapper">
-  <!-- 查找单个 -->
+  <!-- 查找 -->
   <select id="findPostById" resultType="com.sanzu.luntan.pojo.Post">
-  	select * from post where id=#{id} or postTitle=#{postTitle} or userNum=#{userNum}
+  	SELECT
+	post.id,
+	`user`.userName,
+	`user`.imgUrl,
+	section.sectionName,
+	post.postTitle,
+	post.postContent,
+	post.likeNum,
+	post.postTime
+	FROM
+	post
+	INNER JOIN section ON post.sectionId = section.id
+	INNER JOIN `user` ON post.userNum = `user`.userNumber
+	WHERE post.id = #{id}
+	ORDER BY  post.postTime ASC
   </select>
   <!-- 查找全部信息 -->
   <select id="queryPostAll" resultType="com.sanzu.luntan.pojo.Post">
   	SELECT * from post,user,section where post.userNum = user.userNumber and post.sectionId = section.id
+  </select>
+  <!-- 查找指定板块的信息 -->
+  <select id="queryPost" resultType="com.sanzu.luntan.pojo.Post">
+  	SELECT * from post,user,section where post.userNum = user.userNumber and post.sectionId = section.id and post.sectionId = #{sectionId} ORDER BY  post.postTime DESC
   </select>
   <!-- 模糊查找 -->
   <select id="queryPostById" parameterType="String" resultType="com.sanzu.luntan.pojo.Post">
@@ -27,12 +45,30 @@
   <!-- 发表贴子 -->
   <insert id="insertPost" parameterType="com.sanzu.luntan.pojo.Post" >
   	insert into post(userNum,sectionId,postTitle,postContent,likeNum,commentNum,postTime,imgUrl,purview,status)
-  	values(#{userNum},#{sectionId},#{postTitle},#{postContent},#{likeNum},#{commentNum},#{postTime},#{imgUrl},#{purview},#{status})
+  	values(#{userNum},#{sectionId},#{postTitle},#{postContent},#{likeNum},#{postTime},#{imgUrl},#{purview},#{status})
   </insert>
   <!-- 更新用户信息 -->
   <update id="updatePostInfo" parameterType="com.sanzu.luntan.pojo.Post">
   	<!-- 记得使用逗号隔开 -->
   	update post set sectionId=#{sectionId}, postTitle=#{postTitle}, postContent=#{postContent}, imgUrl=#{imgUrl}, purview=#{purview}, status=#{status} where id=#{id}
+  </update>
+  <!-- 更新观看人数 -->
+  <update id="updateLookNum" parameterType="com.sanzu.luntan.pojo.Post">
+  	update post set lookNum = lookNum + 1 where id = #{id}
+  </update>
+  <!-- 更新点赞数,添加 -->
+  <update id="updateLikeNumAdd" parameterType="com.sanzu.luntan.pojo.Post">
+  	update post
+  	INNER JOIN(select postId,count(*) as num from praise group by postId) as b
+  	on post.id = b.postId
+  	set post.likeNum = b.num
+  </update>
+  <!-- 更新评论数数 -->
+  <update id="updatePurview" parameterType="com.sanzu.luntan.pojo.Post">
+  	update post 
+  	INNER JOIN(select postId,count(*) as num from `comment` group by postId) as b
+  	on post.id = b.postId
+  	set post.purview = b.num
   </update>
   <!-- 单个删除 -->
  <delete id="deletePostOne" parameterType="int">
