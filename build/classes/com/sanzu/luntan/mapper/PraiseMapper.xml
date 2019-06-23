@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!--
+  1.在这里首先需要关注的一点是namespace，每一个mapper有一个唯一指定的namespace，一般采用包名+mapper的文件名。
+	之后再操作数据库时就通过namespace+select的id 这种方式来操作。
+  2.mapper内包裹的就是一系列的数据库操作。
+  3.<select> 中 id用于 配合namespace定位到具体操作。
+  4.parameterType表示参数类型，参数就被传递到#{}所在的地方。
+  5.resultType代表了数据的返回类型，这里返回类型就是那个与数据库表信息对应的类 。
+-->
+
+<!-- 用户 -->
+<mapper namespace="com.sanzu.luntan.mapper.PraiseMapper">
+  <!-- 查找点赞信息 -->
+  <select id="selectPraise" parameterType="com.sanzu.luntan.pojo.Praise" resultType="int">
+  	select count(*) from praise where userNum=#{userNum} and postId=#{postId}
+  </select>
+  <!-- 添加点赞信息 -->
+  <insert id="insertPraise" parameterType="com.sanzu.luntan.pojo.Praise" >
+  	insert into praise(userNum,postId) values(#{userNum},#{postId})
+  </insert> 
+  <!-- 删除点赞信息 -->
+  <delete id="deletePraise" parameterType="com.sanzu.luntan.pojo.Praise">
+  	delete from praise where postId=#{postId} and userNum=#{userNum}
+  </delete>
+</mapper>

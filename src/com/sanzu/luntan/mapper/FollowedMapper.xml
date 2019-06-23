@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<!--
+  1.在这里首先需要关注的一点是namespace，每一个mapper有一个唯一指定的namespace，一般采用包名+mapper的文件名。
+	之后再操作数据库时就通过namespace+select的id 这种方式来操作。
+  2.mapper内包裹的就是一系列的数据库操作。
+  3.<select> 中 id用于 配合namespace定位到具体操作。
+  4.parameterType表示参数类型，参数就被传递到#{}所在的地方。
+  5.resultType代表了数据的返回类型，这里返回类型就是那个与数据库表信息对应的类 。
+-->
+
+<!-- 此为查找关注列表查询映射 -->
+<!-- 用户 -->
+<mapper namespace="com.sanzu.luntan.mapper.FollowedMapper">
+  <!-- 关注表和用户表关联查询 -->
+  <select id="queryFollowedAll" resultType="com.sanzu.luntan.pojo.Followed">
+  	select * from user,followed where followed.followedUserId = `user`.id
+  </select>
+  <!-- 查询单个用户的全部关注对象 -->
+  <select id='findFollowedOne' parameterType="int" resultType="com.sanzu.luntan.pojo.Followed">
+  	select * from user,followed where followed.followedUserId = `user`.id and followed.userId = #{userId}
+  </select>
+  <!-- 新建关联关系 -->
+  <insert id="insertFollowed" parameterType="com.sanzu.luntan.pojo.Followed" >
+  	insert into followed(userId,followedUserId) values(#{userId},#{followedUserId})
+  </insert>
+  <!-- 单个删除关注表 -->
+  <delete id="deleteFollowedOne" parameterType="com.sanzu.luntan.pojo.Followed">
+  	delete from followed where followed.userId=#{userId} and followed.followedUserId = #{followedUserId}
+  </delete>
+</mapper>
